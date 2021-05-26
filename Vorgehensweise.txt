@@ -1,0 +1,54 @@
+Allgemein:
+
+TODO:
+	-Probleme während der Bearbeitung sammeln
+
+
+Task 1:
+
+TODO
+	-Gemeinsame GIT Repository aufsetzen (ich habe eine aber können auch andere nutzen)
+		-Dokumente aus dem public-svn holen
+	-JAR File erstellen (hier für erste Ergebnisse)
+	-Setup/Wiederholung Nutzung des Clusters (Ich vermute, dass wir eh nur gemeinsam Runs starten oder nach Absprache)
+	-Ersten Lauf aktivieren
+Fertig
+
+
+Task 2:
+
+TODO
+	-Event handler schreiben, um den Modal Share der Trips zu erfassen
+		-Nur Binnenverkehr ist interessant (oder nur Trips, die im Gebiet starten??)
+		-Hier also eventuell Personen ID's markieren als "relevant" und "nicht relevant"? (in einer Liste?)
+	-Ergebnisse grafisch darstellen (aus Excel? oder hatten wir eine anderen Weg vorgestellt bekommen?)
+
+
+Fertig
+
+
+Task 3:
+
+TODO
+	-Mode Parameter so skalieren, dass Werte aus Tabelle 1 mit 2% Fehlermarge besetzt sind
+	-Falls Lust besteht auch nach Distanzen kalibrieren (vermutlich bessere Note?)
+
+
+Fertig
+
+
+Task 4:
+
+TODO
+	-LaTex Dokument aufsetzen (Sollten ca. 3 Seiten reiner Text sein)
+		-Vorgehensweise Task 1-3 beschreiben
+		-Probleme während der Bearbeitung beschreiben
+		-Zusatzcode (Event Handler, Skripte) beschreiben und verlinken
+		-Grafiken erzeugen
+			-Scoreänderungen während des "finalen" Runs zeigen
+			-Final erreichter Modal Share
+			-Modal-Share-Änderungen im "finalen" Run zeigen (optional)
+		-Link zum Ablageort auf dem Cluster zur Verfügung stellen
+
+
+Fertig
