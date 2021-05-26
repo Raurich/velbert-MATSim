@@ -21,6 +21,7 @@ TODO
 	-Event handler schreiben, um den Modal Share der Trips zu erfassen
 		-Nur Binnenverkehr ist interessant (oder nur Trips, die im Gebiet starten??)
 		-Hier also eventuell Personen ID's markieren als "relevant" und "nicht relevant"? (in einer Liste?)
+			-Alle Wege? Binnenverkehrsquoten und Alle Wege Quoten kalibrieren? (Frage an Janek)
 	-Ergebnisse grafisch darstellen (aus Excel? oder hatten wir eine anderen Weg vorgestellt bekommen?)
 
 
@@ -41,6 +42,7 @@ Task 4:
 
 TODO
 	-LaTex Dokument aufsetzen (Sollten ca. 3 Seiten reiner Text sein)
+	-Overleaf Dokument aufsetzen
 		-Vorgehensweise Task 1-3 beschreiben
 		-Probleme während der Bearbeitung beschreiben
 		-Zusatzcode (Event Handler, Skripte) beschreiben und verlinken

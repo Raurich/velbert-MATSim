@@ -16,6 +16,9 @@ hs_err_pid*
 /target/
 /output/
 /bin/
+/scenarios/shapes/
+/scenarios/equil/matsim-velbert-v1.0.network.xml
+/scenarios/equil/matsim-velbert-v1.0.network.xml.gz
 
 /.idea/
 *.iml
