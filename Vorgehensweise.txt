@@ -7,13 +7,12 @@ TODO:
 Task 1:
 
 TODO
-	-Gemeinsame GIT Repository aufsetzen (ich habe eine aber können auch andere nutzen)
-		-Dokumente aus dem public-svn holen
 	-JAR File erstellen (hier für erste Ergebnisse)
 	-Setup/Wiederholung Nutzung des Clusters (Ich vermute, dass wir eh nur gemeinsam Runs starten oder nach Absprache)
 	-Ersten Lauf aktivieren
 Fertig
-
+	-Gemeinsame GIT Repository aufsetzen (ich habe eine aber können auch andere nutzen)
+		-Dokumente aus dem public-svn holen
 
 Task 2:
 
