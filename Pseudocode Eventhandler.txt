@@ -5,18 +5,14 @@ Schleife 1 (Relevante Personen sammeln){
 	
 	Alle Events durchgehen und ID's sammeln, die ihr erstes Event im Bereich beginnen (Liste mit ID und Mode des Trips)
 		-Also Location mit shapefile abgleichen
-		-Noch keine gute Idee, wie man die ID's sammelt, weil man ja immer checken müsste, ob das auch wirklich das erste Event der Person ist
+		-Identifikation der Bewohner über ihr StartHomeActivity
+		
 
 }
 
 Schleife 2 (Trip Mode sammeln){
 	
 	Sammelvariablen erstellen (eine für jeden Mode)
-		-work
-		-business
-		-leisure
-		-shop_daily
-		-shop_other
 	Listenoutput aus Schleife 1 nehmen und Modeanzahlen zählen
 	
 	
