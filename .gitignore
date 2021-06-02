@@ -21,6 +21,7 @@ hs_err_pid*
 /scenarios/equil/matsim-velbert-v1.0.network.xml.gz
 /scenarios/equil/matsim-velbert-v1.0-1pct.plans.xml.gz
 /scenarios/equil/matsim-velbert-v1.0-10pct.plans.xml.gz
+/src/main/resources/velbert-v1.0-1pct.output_events.xml
 
 /.idea/
 *.iml

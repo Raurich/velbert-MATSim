@@ -1,0 +1,67 @@
+package org.matsim.velbert.analysis;
+
+import org.locationtech.jts.geom.Geometry;
+import org.matsim.api.core.v01.events.ActivityEndEvent;
+import org.matsim.api.core.v01.events.handler.ActivityEndEventHandler;
+import org.matsim.core.api.experimental.events.EventsManager;
+import org.matsim.core.events.EventsUtils;
+import org.matsim.core.utils.geometry.CoordinateTransformation;
+import org.matsim.core.utils.geometry.geotools.MGC;
+import org.matsim.core.utils.geometry.transformations.TransformationFactory;
+import org.matsim.core.utils.gis.ShapeFileReader;
+import org.opengis.feature.simple.SimpleFeature;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class ExportPersons implements ActivityEndEventHandler {
+
+	private static final String pathToEventsFile = "src/main/resources/velbert-v1.0-1pct.output_events.xml";
+	private static final String pathToOutputFile = "personIdsFromVelbert.txt";
+	private static final String shapeFile = "src/main/resources/OSM_PLZ_072019.shp";
+	private static final CoordinateTransformation transformation = TransformationFactory.getCoordinateTransformation("EPSG:25832", "EPSG:3857");
+	private static final List<String> plzVelbert = Arrays.asList("42549", "42551", "42553", "42555");
+
+	private final List<Geometry> velbert;
+	private final Set<String> validPersonIds = new HashSet<>();
+
+	public ExportPersons() {
+		Collection<SimpleFeature> features = ShapeFileReader.getAllFeatures(shapeFile);
+		velbert = features.stream()
+				.filter(feature -> plzVelbert.contains(feature.getAttribute("plz")))
+				.map(feature -> (Geometry) feature.getDefaultGeometry())
+				.collect(Collectors.toList());
+	}
+
+	public static void main(String[] args) {
+		EventsManager manager = EventsUtils.createEventsManager();
+		ExportPersons handler = new ExportPersons();
+		manager.addHandler(handler);
+		EventsUtils.readEvents(manager, pathToEventsFile);
+		handler.exportResult();
+	}
+
+	@Override
+	public void handleEvent(ActivityEndEvent activityEndEvent) {
+		if (activityEndEvent.getActType().startsWith("home") &&
+				velbert.stream().anyMatch(plz -> plz.covers(MGC.coord2Point(transformation.transform(activityEndEvent.getCoord()))))) {
+			validPersonIds.add(activityEndEvent.getPersonId().toString());
+		}
+	}
+
+	private void exportResult() {
+		try (FileWriter fw = new FileWriter(pathToOutputFile)) {
+			try (BufferedWriter bw = new BufferedWriter(fw)) {
+				bw.write(validPersonIds.stream().collect(Collectors.joining("\n")));
+				System.out.println("Found " + validPersonIds.size() + " persons from velbert");
+				System.out.println("Wrote their IDs to " + new File(pathToOutputFile).getAbsolutePath());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
