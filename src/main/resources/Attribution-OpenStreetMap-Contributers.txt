@@ -1,0 +1,3 @@
+Downloaded from: https://www.suche-postleitzahl.org/downloads
+
+According to the above website this shape file falls under Open Database License and was created using OpenStreetMap (https://www.openstreetmap.org/)
