@@ -56,7 +56,7 @@ public class ExportPersons implements ActivityEndEventHandler {
 	private void exportResult() {
 		try (FileWriter fw = new FileWriter(pathToOutputFile)) {
 			try (BufferedWriter bw = new BufferedWriter(fw)) {
-				bw.write(validPersonIds.stream().collect(Collectors.joining("\n")));
+				bw.write(String.join("\n", validPersonIds));
 				System.out.println("Found " + validPersonIds.size() + " persons from velbert");
 				System.out.println("Wrote their IDs to " + new File(pathToOutputFile).getAbsolutePath());
 			}
