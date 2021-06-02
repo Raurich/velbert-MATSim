@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 
 public class ModalShareAnalysis {
 
-    private static final String shapeFile = "src/main/resources/OSM_PLZ_072019.shp";
-    private static final String populationPath = "src/main/resources/velbert-v1.0-1pct.output_plans.xml.gz";
-    private static final CoordinateTransformation transformation = TransformationFactory.getCoordinateTransformation("EPSG:25832", "EPSG:3857");
-    private static final List<String> plzVelbert = Arrays.asList("42549", "42551", "42553", "42555");
+	private static final String shapeFile = "src/main/resources/OSM_PLZ_072019.shp";
+	private static final String populationPath = "src/main/resources/velbert-v1.0-1pct.output_plans.xml.gz";
+	private static final CoordinateTransformation transformation = TransformationFactory.getCoordinateTransformation("EPSG:25832", "EPSG:3857");
+	private static final List<String> plzVelbert = Arrays.asList("42549", "42551", "42553", "42555");
 
 	public static void main(String[] args) {
 		Collection<SimpleFeature> features = ShapeFileReader.getAllFeatures(shapeFile);
@@ -35,16 +35,16 @@ public class ModalShareAnalysis {
 		for (Person person : population.getPersons().values()) {
 			Plan plan = person.getSelectedPlan();
 
-            List<Activity> activities = TripStructureUtils.getActivities(plan, TripStructureUtils.StageActivityHandling.ExcludeStageActivities);
-            boolean livingInVelbert = activities.stream()
-                    .filter(a -> a.getType().startsWith("home"))
-                    .map(Activity::getCoord)
-                    .map(transformation::transform)
-                    .map(MGC::coord2Point)
-                    .allMatch(coord -> velbert.stream().anyMatch(plz -> plz.covers(coord)));
-            if (!livingInVelbert) {
-                continue;
-            }
+			List<Activity> activities = TripStructureUtils.getActivities(plan, TripStructureUtils.StageActivityHandling.ExcludeStageActivities);
+			boolean livingInVelbert = activities.stream()
+					.filter(a -> a.getType().startsWith("home"))
+					.map(Activity::getCoord)
+					.map(transformation::transform)
+					.map(MGC::coord2Point)
+					.allMatch(coord -> velbert.stream().anyMatch(plz -> plz.covers(coord)));
+			if (!livingInVelbert) {
+				continue;
+			}
 
 
 			personCounter++;
@@ -52,13 +52,18 @@ public class ModalShareAnalysis {
 			List<TripStructureUtils.Trip> trips = TripStructureUtils.getTrips(plan);
 			tripCounter += trips.size();
 			for (TripStructureUtils.Trip trip : trips) {
-				trip.getLegsOnly().stream().map(Leg::getMode).distinct().forEach(mode -> {
-					if (modalCounter.containsKey(mode)) {
-						modalCounter.put(mode, modalCounter.get(mode) + 1);
-					} else {
-						modalCounter.put(mode, 1);
+				List<String> modes = trip.getLegsOnly().stream().map(Leg::getMode).distinct().collect(Collectors.toList());
+				String mode = null;
+				for (String possibleMode : modes) {
+					if (mode == null || "walk".equals(mode)) {
+						mode = possibleMode;
 					}
-				});
+				}
+				if (modalCounter.containsKey(mode)) {
+					modalCounter.put(mode, modalCounter.get(mode) + 1);
+				} else {
+					modalCounter.put(mode, 1);
+				}
 			}
 		}
 		System.out.println(personCounter + " people live in Velbert");
