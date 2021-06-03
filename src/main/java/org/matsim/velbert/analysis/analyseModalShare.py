@@ -35,7 +35,7 @@ print(f"Trips after filtering: {number_of_trips}")
 stat = trips.groupby(["longest_distance_mode"]).count()["trip_id"] / number_of_trips
 
 modal_share = dict([(m, stat[m]) for m in modes_full])
-modal_share["pt"] = modal_share["pt"] + modal_share["ride"]
+modal_share["car"] = modal_share["car"] + modal_share["ride"]
 modal_share.pop("ride")
 
 assert abs(
