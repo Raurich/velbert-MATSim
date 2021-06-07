@@ -5,7 +5,7 @@ def write_file(pt_const, bike_const, car_const, output):
 #$ -m be
 #$ -M p.heinrich@campus.tu-berlin.de
 #$ -j y
-#$ -o job-log-1pct
+#$ -o job-log-1pct{3}
 #$ -l h_rt=80000
 #$ -l mem_free=4G
 #$ -pe mp 4
@@ -22,14 +22,14 @@ module add java/11
 # start matsim
 java -cp $JAR -Xmx16G $MAIN_CLASS $ARGS"""
 
-    f = open(f"velberRun{output}.sh", "w")
+    f = open(f"velbertRun{output}.sh", "w")
     f.write(script.format(pt_const, bike_const, car_const, output))
     f.close()
 
 
-pt_options = [5, 10, 15]
-bike_options = [3, 7]
-car_options = [1, 3]
+pt_options = [-5, -10, -15]
+bike_options = [-3, -7]
+car_options = [-1, -3]
 
 count = 0
 
