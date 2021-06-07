@@ -2,9 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-path_to_csv = "../../../../../../../scenarios/equil/output-velbert-v1.0-1pct/velbert-v1.0-1pct.output_trips.csv"
-csv_name = "velbert-v1.0-1pct.output_trips.csv"
-path_to_txt = "../../../../../resources/personIdsFromVelbert.txt"
+path_to_csv = "scenarios/equil/output-velbert-v1.0-1pct/velbert-v1.0-1pct.output_trips.csv"
+path_to_txt = "src/main/resources/personIdsFromVelbert.txt"
 
 modes_full = ["bike", "car", "pt", "ride", "walk"]
 modes_comp = ["bike", "car", "pt", "walk"]
