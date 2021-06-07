@@ -8,15 +8,29 @@ import org.matsim.core.controler.AbstractModule;
 import org.matsim.core.controler.Controler;
 import org.matsim.core.scenario.ScenarioUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RunVelbert {
 
     public static void main(String[] args) {
 
-        var config = ConfigUtils.loadConfig("scenarios/equil/matsim-velbert-v1.0.config.xml");
+        final String PT_CONST = args[0];
+        final String BIKE_CONST = args[1];
+        final String CAR_CONST = args[2];
+
+        String[] newArgs = Arrays.copyOfRange(args, 3, args.length);
+
+        var config = ConfigUtils.loadConfig(newArgs);
 
         config.plansCalcRoute().setAccessEgressType(PlansCalcRouteConfigGroup.AccessEgressType.accessEgressModeToLink);
+
+        config.controler().setLastIteration(80);
+
+        config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("pt").setConstant(Integer.parseInt(PT_CONST)));
+        config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("bike").setConstant(Integer.parseInt(BIKE_CONST)));
+        config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("car").setConstant(Integer.parseInt(CAR_CONST)));
+        config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("ride").setConstant(Integer.parseInt(CAR_CONST)));
 
         for (long ii = 600; ii <= 97200; ii += 600) {
 
