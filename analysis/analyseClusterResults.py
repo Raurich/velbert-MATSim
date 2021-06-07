@@ -7,6 +7,13 @@ def analyseModalShare(trips, personsInVelbert, runId):
     modes_full = ["bike", "car", "pt", "ride", "walk"]
     modes_comp = ["bike", "car", "pt", "walk"]
 
+    desired_modal_share = {
+        "bike": 0.098,
+        "car": 0.563,
+        "pt": 0.084,
+        "walk": 0.254
+    }
+
     personMask = trips["person"].isin(personsInVelbert)
     trips = trips[personMask]
     number_of_trips = trips.shape[0]
@@ -20,9 +27,11 @@ def analyseModalShare(trips, personsInVelbert, runId):
     assert abs(
         sum(modal_share.values()) - 1.0) < 0.01, f"Modal share does not sum up to 100%, but to {sum(modal_share.values())}"
 
-    with open("resultShares.csv", "a") as resultCsv:
+    with open("resultShares.csv", "a", newline="") as resultCsv:
         writer = csv.writer(resultCsv, delimiter=";")
-        writer.writerow([runId, modal_share["pt"], modal_share["bike"], modal_share["car"], modal_share["walk"]])
+        writer.writerow(
+            [runId, desired_modal_share["pt"] - modal_share["pt"], desired_modal_share["bike"] - modal_share["bike"],
+             desired_modal_share["car"] - modal_share["car"], desired_modal_share["walk"] - modal_share["walk"]])
 
 
 ids = range(0, 12)
