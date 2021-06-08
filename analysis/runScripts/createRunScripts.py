@@ -22,16 +22,16 @@ module add java/11
 # start matsim
 java -cp $JAR -Xmx16G $MAIN_CLASS $ARGS"""
 
-    f = open(f"velbertRun{output}.sh", "w")
+    f = open(f"velbertRun{output}.sh", "w", newline="\n")
     f.write(script.format(pt_const, bike_const, car_const, output))
     f.close()
 
 
-pt_options = [-5, -10, -15]
-bike_options = [-3, -7]
-car_options = [-1, -3]
+pt_options = [-15, -17, -19]
+bike_options = [-5, -7]
+car_options = [-1, -2]
 
-count = 0
+count = 12
 
 for p in pt_options:
     for b in bike_options:
