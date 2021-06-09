@@ -26,12 +26,16 @@ java -cp $JAR -Xmx16G $MAIN_CLASS $ARGS"""
     f.write(script.format(pt_const, bike_const, car_const, output))
     f.close()
 
+    f = open(f"qsubRun.sh", "a", newline="\n")
+    f.write(f"qsub velbertRun{output}.sh \n")
+    f.close()
 
-pt_options = [-19, -25, -30, -35]
-bike_options = [-5, -7]
-car_options = [-1, -2]
 
-count = 24
+pt_options = [-20, -25, -30]
+bike_options = [-3, -4, -5]
+car_options = [0]
+
+count = 40
 
 for p in pt_options:
     for b in bike_options:

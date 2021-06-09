@@ -15,7 +15,8 @@ def analyseModalShare(trips, personsInVelbert, runId):
     }
 
     personMask = trips["person"].isin(personsInVelbert)
-    trips = trips[personMask]
+    tripsMask = trips["longest_distance_mode"].notnull()
+    trips = trips[personMask & tripsMask]
     number_of_trips = trips.shape[0]
 
     stat = trips.groupby(["longest_distance_mode"]).count()["trip_id"] / number_of_trips
@@ -34,7 +35,7 @@ def analyseModalShare(trips, personsInVelbert, runId):
              desired_modal_share["car"] - modal_share["car"], desired_modal_share["walk"] - modal_share["walk"]])
 
 
-ids = range(24, 40)
+ids = range(0, 40)
 
 baseString = "velbert-v1.0-1pct.output_trips{0}.csv"
 
