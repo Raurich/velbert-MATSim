@@ -25,8 +25,6 @@ public class RunVelbert {
 
         config.plansCalcRoute().setAccessEgressType(PlansCalcRouteConfigGroup.AccessEgressType.accessEgressModeToLink);
 
-        config.controler().setLastIteration(80);
-
         config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("pt").setConstant(Integer.parseInt(PT_CONST)));
         config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("bike").setConstant(Integer.parseInt(BIKE_CONST)));
         config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("car").setConstant(Integer.parseInt(CAR_CONST)));
