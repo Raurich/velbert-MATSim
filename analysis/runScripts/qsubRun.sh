@@ -1,0 +1,12 @@
+qsub velbertRun61.sh 
+qsub velbertRun62.sh 
+qsub velbertRun63.sh 
+qsub velbertRun64.sh 
+qsub velbertRun65.sh 
+qsub velbertRun66.sh 
+qsub velbertRun67.sh 
+qsub velbertRun68.sh 
+qsub velbertRun69.sh 
+qsub velbertRun70.sh 
+qsub velbertRun71.sh 
+qsub velbertRun72.sh 
