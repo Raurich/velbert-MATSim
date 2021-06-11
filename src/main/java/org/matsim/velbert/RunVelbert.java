@@ -18,14 +18,15 @@ public class RunVelbert {
         final String PT_CONST = args[0];
         final String BIKE_CONST = args[1];
         final String CAR_CONST = args[2];
+        final String PT_UT = args[3];
 
-        String[] newArgs = Arrays.copyOfRange(args, 3, args.length);
+        String[] newArgs = Arrays.copyOfRange(args, 4, args.length);
 
         var config = ConfigUtils.loadConfig(newArgs);
 
         config.plansCalcRoute().setAccessEgressType(PlansCalcRouteConfigGroup.AccessEgressType.accessEgressModeToLink);
 
-        config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("pt").setConstant(Integer.parseInt(PT_CONST)));
+        config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("pt").setConstant(Integer.parseInt(PT_CONST)).setMarginalUtilityOfTraveling(Integer.parseInt(PT_UT)));
         config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("bike").setConstant(Integer.parseInt(BIKE_CONST)));
         config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("car").setConstant(Integer.parseInt(CAR_CONST)));
         config.planCalcScore().addModeParams(new PlanCalcScoreConfigGroup.ModeParams("ride").setConstant(Integer.parseInt(CAR_CONST)));
