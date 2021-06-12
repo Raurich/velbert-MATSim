@@ -35,7 +35,7 @@ def analyseModalShare(trips, personsInVelbert, runId):
              desired_modal_share["car"] - modal_share["car"], desired_modal_share["walk"] - modal_share["walk"]])
 
 
-ids = range(0, 40)
+ids = range(115, 127)
 
 baseString = "velbert-v1.0-1pct.output_trips{0}.csv"
 

@@ -31,11 +31,11 @@ java -cp $JAR -Xmx16G $MAIN_CLASS $ARGS"""
     f.close()
 
 
-pt_options = [-20, -25, -30]
+pt_options = [-200, -400, -600]
 bike_options = [-3, -4, -5]
 car_options = [0]
 
-count = 40
+count = 97
 
 for p in pt_options:
     for b in bike_options:

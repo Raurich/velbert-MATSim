@@ -31,17 +31,17 @@ java -cp $JAR -Xmx16G $MAIN_CLASS $ARGS"""
     f.close()
 
 
-pt_options = [-5, -9, -13]
+pt_options = [-9, -11, -13, -15]
 bike_options = [-4]
 car_options = [0]
-pt_margin = [-5, -7, -9]
+pt_margin = [-9, -11, -13]
 
-count = 106
+count = 115
 
 for p in pt_options:
     for b in bike_options:
         for c in car_options:
             for p_m in pt_margin:
                 write_file(p, b, c, p_m, count)
-                print(f"Id {count}: {p}, {b}, {c}")
+                print(f"Id {count}: {p}, {b}, {c}, {p_m}")
                 count += 1
