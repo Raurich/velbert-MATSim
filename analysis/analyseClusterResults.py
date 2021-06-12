@@ -14,11 +14,13 @@ def analyseModalShare(trips, personsInVelbert, runId):
         "walk": 0.254
     }
 
+    # filter persons
     personMask = trips["person"].isin(personsInVelbert)
     tripsMask = trips["longest_distance_mode"].notnull()
     trips = trips[personMask & tripsMask]
     number_of_trips = trips.shape[0]
 
+    # calculate modal share
     stat = trips.groupby(["longest_distance_mode"]).count()["trip_id"] / number_of_trips
 
     modal_share = dict([(m, stat[m]) for m in modes_full])
@@ -28,6 +30,7 @@ def analyseModalShare(trips, personsInVelbert, runId):
     assert abs(
         sum(modal_share.values()) - 1.0) < 0.01, f"Modal share does not sum up to 100%, but to {sum(modal_share.values())}"
 
+    # write modal share
     with open("resultShares.csv", "a", newline="") as resultCsv:
         writer = csv.writer(resultCsv, delimiter=";")
         writer.writerow(
