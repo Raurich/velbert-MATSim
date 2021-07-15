@@ -23,18 +23,15 @@ public class ExportPersons implements ActivityEndEventHandler {
     private static final String pathToEventsFile = "src/main/resources/velbert-v1.0-1pct.output_events.xml";
     private static final String pathToOutputFile = "src/main/resources/personIdsFromVelbert.txt";
     private static final String shapeFile = "src/main/resources/OSM_PLZ_072019.shp";
-    private static final CoordinateTransformation transformation = TransformationFactory.getCoordinateTransformation("EPSG:25832", "EPSG:3857");
-    private static final List<String> plzVelbert = Arrays.asList("42549", "42551", "42553", "42555");
+    private static final List<String> PLZ_VELBERT = Arrays.asList("42549", "42551", "42553", "42555");
 
-    private final List<Geometry> velbert;
+    private PlzPredicate velbertPredicate;
+
     private final Set<String> validPersonIds = new HashSet<>();
 
     public ExportPersons() {
         Collection<SimpleFeature> features = ShapeFileReader.getAllFeatures(shapeFile);
-        velbert = features.stream()
-                .filter(feature -> plzVelbert.contains(feature.getAttribute("plz")))
-                .map(feature -> (Geometry) feature.getDefaultGeometry())
-                .collect(Collectors.toList());
+        velbertPredicate = new PlzPredicate(features, PLZ_VELBERT);
     }
 
     public static void main(String[] args) {
@@ -47,8 +44,7 @@ public class ExportPersons implements ActivityEndEventHandler {
 
     @Override
     public void handleEvent(ActivityEndEvent activityEndEvent) {
-        if (activityEndEvent.getActType().startsWith("home") &&
-                velbert.stream().anyMatch(plz -> plz.covers(MGC.coord2Point(transformation.transform(activityEndEvent.getCoord()))))) {
+        if (activityEndEvent.getActType().startsWith("home") && velbertPredicate.test(activityEndEvent.getCoord())) {
             validPersonIds.add(activityEndEvent.getPersonId().toString());
         }
     }
